@@ -19,7 +19,7 @@ trait DateCheck
         return self::check_in_events($date);
     }
 
-    public function convertToHijri($y, $m, $d)
+    public static function convertToHijri($y, $m, $d)
     {
         $gregorian_date = self::convertToGregorian($y, $m, $d);
 
@@ -33,12 +33,12 @@ trait DateCheck
         ];
     }
 
-    public function convertToGregorian($y, $m, $d)
+    public static function convertToGregorian($y, $m, $d)
     {
         try {
             $gregorian = JalaliToGregorian::convert($y, $m, $d);
             $gregorian_date = $gregorian[0].'-'.$gregorian[1].'-'.$gregorian[2] ;
-
+            
             $gre = Carbon::createFromFormat(IranEventsInterface::FULLDATE_STRING_FORMAT, $gregorian_date.' 00:00:00')
                 ->addDay(IranEventsInterface::DEFAULT_ADJUST_DAY)->format(IranEventsInterface::DEFAULT_STRING_FORMAT);
             return $gre;
@@ -48,7 +48,7 @@ trait DateCheck
         }
     }
 
-    public function check_in_events($date)
+    public static function check_in_events($date)
     {
         $date = explode('-', $date);
 
@@ -65,11 +65,20 @@ trait DateCheck
 
         foreach ($events as $key => $value)
         {
-            if (($value['Day'] == $persian_d && $value['Month'] == $persian_m) || ($value['Day'] == $hijri_d && $value['Month'] == $hijri_m))
+            if ($value['Day'] == $persian_d && $value['Month'] == $persian_m && $value['Calendar'] == 'Persian')
             {
                 return [
                     'holiday' => true,
-                    'type' => ($value['Calendar'] == 'Hijri') ? IranEventsInterface::Hijri_HOLIDDAY_LABEL : IranEventsInterface::PERSIAN_HOLIDDAY_LABEL,
+                    'type' => IranEventsInterface::PERSIAN_HOLIDDAY_LABEL,
+                    'desc' => $value['Title']
+                ];
+            }
+
+            if ($value['Day'] == $hijri_d && $value['Month'] == $hijri_m && $value['Calendar'] == 'Hijri')
+            {
+                return [
+                    'holiday' => true,
+                    'type' => IranEventsInterface::Hijri_HOLIDDAY_LABEL,
                     'desc' => $value['Title']
                 ];
             }

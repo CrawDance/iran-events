@@ -15,7 +15,7 @@
         },
         "files": [
             "src/Helpers/helpers.php",
-            "src/Helpers/Gregorian.php",
+            "src/Helpers/JalaliToGregorian.php",
             "src/Helpers/IranEventsRepository.php"
         ]
     },

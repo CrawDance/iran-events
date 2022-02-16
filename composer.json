@@ -1,0 +1,37 @@
+{
+    "name": "crawdance/iran-events",
+    "description": "A simple package to check Iran holidays and events using Jalali Calendar",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Keivan Shahkarami",
+            "email": "keivan.74.95@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CrawDance\\IranEvents\\" : "src"
+        },
+        "files": [
+            "src/Helpers/helpers.php",
+            "src/Helpers/Gregorian.php",
+            "src/Helpers/IranEventsRepository.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "alkoumi/laravel-hijri-date": "^1.0",
+        "nesbot/carbon" : "^2.16"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CrawDance\\IranEvents\\Providers\\IranEventsServiceProvider"
+            ],
+            "aliases": {
+                "IranEvents": "CrawDance\\IranEvents\\IranEvents"
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 ## Iran Events And Holidays
 
-A Simple package to check if the inserted date is holiday or not.
+A simple package to check Iran holidays and events using Jalali Calendar.
 
 ##  Installation 
 
@@ -13,7 +13,7 @@ composer require crawdance/iran-events
 
 Add this line in your app.php file if your laravel version is below 5.6:
 
- ```json
+ ```sh
 'providers' => [
   ...
     CrawDance\IranEvents\Providers\IranEventsServiceProvider::class,
@@ -23,13 +23,13 @@ Add this line in your app.php file if your laravel version is below 5.6:
 
 ## Usage:
 
-```json
+```sh
 return IranEvents::Check('1408-12-29');
 ```
 
 The result is:
 
-```json
+```sh
 array:3 [▼
   "holiday" => true
   "type" => "تقویم خورشیدی"
@@ -37,11 +37,11 @@ array:3 [▼
 ]
 ```
 
-####Hijri Events: 
-```json
+#### Hijri Events: 
+```sh
 return IranEvents::Check('1408-4-13');
 ```
-```json
+```sh
 array:3 [▼
   "holiday" => true
   "type" => "تقویم قمری"
@@ -51,10 +51,12 @@ array:3 [▼
 
 This package requires <a href="https://github.com/alkoumi/laravel-hijri-date">laravel-hijri-date</a> and <a href="https://github.com/briannesbitt/Carbon">Carbon</a> to convert Jalali inserted date to Ummul Qura Hijri and Gregorian.
 
-##Issues
+## Issues
+
 If you find a bug while using this package , please open an issue about the bug also affects ... and, unless it is obvious, the reason why you think the current result is wrong.
 
-##License
+## License
+
 The MIT License (MIT).
 
 
